@@ -1,8 +1,48 @@
-@import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+/* ==========================================
+   CONFIG, THEMES & VARIABLE SYSTEMS
+   ========================================== */
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@400;500;600;700;800&display=swap');
 
-.root{
-    --font-family: "Playfair Display", serif;
+:root {
+    /* Typography Engine */
+    --font-primary: 'Poppins', sans-serif;
+    --font-accent: 'Playfair Display', serif;
+    
+    /* Theme Variant 1: DriveX Rental (Warm Gold & Dark) */
+    --color-primary: #ffb400;
+    --color-primary-hover: #e09e00;
+    --color-dark: #111111;
+    --color-dark-muted: rgba(0, 0, 0, 0.85);
+
+    /* Theme Variant 2: Minimalist (Cool Blues & Teals) */
+    --color-secondary: #3498db;
+    --color-secondary-hover: #2980b9;
+    --color-success: #2ecc71;
+    --color-success-hover: #27ae60;
+    --color-brand-dark: #2c3e50;
+    --color-brand-muted: #bdc3c7;
+
+    /* Semantic UI Tokens */
+    --bg-light: #f8f9fa;
+    --bg-surface: #ffffff;
+    --text-main: #333333;
+    --text-muted: #666666;
+    --border-base: #dddddd;
+
+    /* Global Micro-interactions & Design Tokens */
+    --radius-sm: 4px;
+    --radius-md: 10px;
+    --radius-lg: 15px;
+    --radius-xl: 20px;
+    --radius-full: 50px;
+    --shadow-soft: 0 5px 20px rgba(0, 0, 0, 0.08);
+    --shadow-subtle: 0 2px 5px rgba(0, 0, 0, 0.05);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+/* ==========================================
+   GLOBAL RESET & BASE STYLES
+   ========================================== */
 * {
     margin: 0;
     padding: 0;
@@ -10,64 +50,179 @@
 }
 
 body {
-    font-family: var(--font-family);
-    background-color: #f8f9fa;
-    color: #333;
+    font-family: var(--font-primary);
+    background-color: var(--bg-light);
+    color: var(--text-main);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Clean fallback mechanism using programmatic class styling */
+.root {
+    --font-primary: var(--font-accent);
 }
 
 a {
     text-decoration: none;
-    transition: all 0.3s ease;
+    color: inherit;
+    transition: var(--transition-smooth);
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+input, select, button {
+    font-family: inherit;
+    outline: none;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* A11y Accessible Focus States */
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* ==========================================
+   NAVBAR VARIANT 1 (DRIVEX RENTAL)
+   ========================================== */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: var(--color-dark-muted);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 1000;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.logo {
+    color: #ffffff;
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.logo span {
+    color: var(--color-primary);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    list-style: none;
+}
+
+.nav-links a {
+    color: #ffffff;
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    color: var(--color-primary);
+}
+
+/* ==========================================
+   NAVBAR VARIANT 2 (MINIMAL / ELEGANT)
+   ========================================== */
 .navbar {
-    background-color: #ffffff;
+    background-color: var(--bg-surface);
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: var(--shadow-subtle);
 }
 
-.navbar .logo{
+.navbar .logo {
     font-weight: 700;
     font-size: 1.2rem;
-    color: #2c3e50;
+    color: var(--color-brand-dark);
 }
-.logo img{
+
+.logo img {
     width: 50px;
     height: 50px;
-}
-.nav-links {
-    list-style: none;
+    object-fit: contain;
 }
 
 .nav-btn-secondary {
-    color: #3498db;
-    border: 1px solid #3498db;
+    color: var(--color-secondary);
+    border: 1px solid var(--color-secondary);
     padding: 6px 14px;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     font-size: 0.9rem;
     font-weight: 600;
+    background: transparent;
+    cursor: pointer;
+    transition: var(--transition-smooth);
 }
 
 .nav-btn-secondary:hover {
-    background-color: #3498db;
+    background-color: var(--color-secondary);
     color: #ffffff;
 }
+
+/* ==========================================
+   HERO INTERFACES
+   ========================================== */
+/* Hero Variant 1: Premium Car Rental */
+.hero-rental {
+    min-height: 100vh;
+    background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)),
+                url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1600&q=80") no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+}
+
+.hero-rental .hero-content {
+    color: #ffffff;
+    max-width: 700px;
+}
+
+.hero-rental .hero-content h1 {
+    font-size: clamp(40px, 6vw, 70px);
+    line-height: 1.1;
+    margin-bottom: 20px;
+    font-weight: 800;
+}
+
+.hero-rental .hero-content p {
+    font-size: clamp(16px, 2.5vw, 20px);
+    margin-bottom: 30px;
+}
+
+/* Hero Variant 2: Minimal Editorial Layout */
 .hero {
     background: linear-gradient(rgba(44, 62, 80, 0.85), rgba(44, 62, 80, 0.95)), 
-                url('./background-image.png') no-repeat center center/cover;
+                url('./resources/background-image.png') no-repeat center center/cover;
     color: #ffffff;
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 40px 20px;
+    padding: 80px 20px;
 }
 
 .hero-content {
@@ -83,36 +238,320 @@ a {
 .hero-content p {
     font-size: 1rem;
     margin-bottom: 30px;
-    color: #dddddd;
+    color: var(--border-base);
     line-height: 1.5;
+}
+
+/* ==========================================
+   BUTTON ARCHITECTURE
+   ========================================== */
+.hero-btns {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 35px;
+    border: none;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition-smooth);
+}
+
+.primary {
+    background: var(--color-primary);
+    color: var(--color-dark);
+}
+
+.primary:hover {
+    background: var(--color-primary-hover);
+    transform: translateY(-3px);
+}
+
+.secondary {
+    background: transparent;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+}
+
+.secondary:hover {
+    background: #ffffff;
+    color: var(--color-dark);
 }
 
 .hero-btn-primary {
     display: inline-block;
-    background-color: #2ecc71;
+    background-color: var(--color-success);
     color: #ffffff;
     padding: 14px 28px;
-    border-radius: 30px;
+    border-radius: var(--radius-full);
     font-weight: 600;
     font-size: 1.1rem;
     box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+    border: none;
+    cursor: pointer;
+    transition: var(--transition-smooth);
 }
 
 .hero-btn-primary:hover {
-    background-color: #27ae60;
+    background-color: var(--color-success-hover);
     transform: translateY(-2px);
 }
 
 .hero-btn-primary:active {
     transform: translateY(0);
 }
-.footer {
-    background-color: #2c3e50;
-    color: #bdc3c7;
+
+/* ==========================================
+   CORE GRID ENGINE & APP COMPONENTS
+   ========================================== */
+.section-title {
     text-align: center;
-    padding: 15px 20px;
+    margin-bottom: 60px;
+}
+
+.section-title h2 {
+    font-size: clamp(32px, 4vw, 45px);
+    margin-bottom: 10px;
+}
+
+.section-title p {
+    color: var(--text-muted);
+}
+
+/* Universal Flexible Grid Component */
+.stats-grid, .service-grid, .car-grid, .process-grid, .form-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(var(--grid-min, 250px), 1fr));
+}
+
+/* Stats Element */
+.stats {
+    padding: 80px 0;
+    background: var(--bg-surface);
+}
+
+.stats-grid {
+    --grid-min: 220px;
+}
+
+.stat-box {
+    background: var(--bg-light);
+    text-align: center;
+    padding: 35px;
+    border-radius: var(--radius-lg);
+}
+
+.stat-box h2 {
+    color: var(--color-primary);
+    font-size: 42px;
+    margin-bottom: 5px;
+}
+
+/* Services Block */
+.services {
+    padding: 100px 0;
+}
+
+.service-grid {
+    --grid-min: 280px;
+    gap: 25px;
+}
+
+.service-card {
+    background: var(--bg-surface);
+    padding: 30px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition-smooth);
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+}
+
+.service-card h3 {
+    margin-bottom: 15px;
+}
+
+/* Cars Fleet System */
+.cars {
+    padding: 100px 0;
+    background: var(--bg-surface);
+}
+
+.car-grid {
+    --grid-min: 300px;
+    gap: 30px;
+}
+
+.car-card {
+    background: var(--bg-surface);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+}
+
+.car-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.car-info {
+    padding: 25px;
+}
+
+.car-info h3 {
+    margin-bottom: 10px;
+}
+
+.price {
+    color: var(--color-primary);
+    font-size: 28px;
+    font-weight: 700;
+    margin: 15px 0;
+}
+
+.book-btn {
+    width: 100%;
+    background: var(--color-dark);
+    color: #ffffff;
+    border: none;
+    padding: 14px;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.book-btn:hover {
+    background: var(--color-primary);
+    color: var(--color-dark);
+}
+
+/* Structural Journey Steps */
+.process {
+    padding: 100px 0;
+}
+
+.process-card {
+    background: var(--bg-surface);
+    text-align: center;
+    padding: 30px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+}
+
+.process-card span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radius-full);
+    background: var(--color-primary);
+    color: var(--color-dark);
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+/* Interactive Input Engine */
+.booking {
+    padding: 100px 0;
+    background: var(--bg-surface);
+}
+
+.booking-form {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--bg-light);
+    padding: 40px;
+    border-radius: var(--radius-xl);
+}
+
+input, select {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid var(--border-base);
+    border-radius: var(--radius-md);
+    background-color: var(--bg-surface);
+    color: var(--text-main);
+    transition: var(--transition-smooth);
+}
+
+input:focus, select:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(255, 180, 0, 0.15);
+}
+
+.submit-btn {
+    width: 100%;
+    margin-top: 20px;
+    background: var(--color-primary);
+    border: none;
+    padding: 16px;
+    border-radius: var(--radius-md);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-dark);
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.submit-btn:hover {
+    background: var(--color-primary-hover);
+    transform: translateY(-2px);
+}
+
+/* ==========================================
+   FOOTER SCHEMAS
+   ========================================== */
+footer, .footer {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+/* DriveX Footer Style */
+footer {
+    background: var(--color-dark);
+    color: #ffffff;
+}
+
+/* Modern Minimal Footer Style */
+.footer {
+    background-color: var(--color-brand-dark);
+    color: var(--color-brand-muted);
+    padding: 20px;
     font-size: 0.85rem;
 }
+
+/* ==========================================
+   ADVANCED RESPONSIVENESS (BREAKPOINTS)
+   ========================================== */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; /* Ready framework for modular JavaScript mobile menus */
+    }
+    .hero-btns {
+        flex-direction: column;
+        width: 100%;
+    }
+    .btn, .hero-btn-primary {
+        width: 100%;
+    }
+    .booking-form {
+        padding: 20px;
+    }
+}
+
 @media (min-width: 768px) {
     .navbar {
         padding: 20px 50px;
