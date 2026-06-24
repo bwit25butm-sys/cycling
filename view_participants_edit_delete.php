@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>View participants</title>
     <link rel="stylesheet" href="view.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <h1>View all of the participants for edit or delete</h1>
@@ -25,17 +26,17 @@
             $stmt->execute();
             $result=$stmt->fetchall(PDO::FETCH_ASSOC);
 
-            echo count($result);
             if(count($result)){
                 echo "<table border='1'>";
                 echo "<tr>
-                <th>ID</th>
-                <th>First Name</th>
-                <th>Sur Name</th>
-                <th>Email</th>
-                <th>Power Output</th>
-                <th>Distance</th>
-                </tr>";
+                        <th>ID</th>
+                        <th>First Name</th>
+                        <th>Sur Name</th>
+                        <th>Email</th>
+                        <th>Power Output</th>
+                        <th>Distance</th>
+                        <th>Actions</th>
+                    </tr>";
 
                 foreach($result as $row){
                     echo "<tr>";
@@ -45,7 +46,8 @@
                         echo "<td>".$row['email']."</td>:";
                         echo "<td>".$row['power_output']."</td>:";
                         echo "<td>".$row['distance']."</td>:";
-                    "</tr>";
+                        echo "<td><a href='edit_participant.php?id=".$row['id']."'>Edit</a> | <a href='delete.php?id=".$row['id']."'>Delete</a></td>";  
+                    echo "</tr>";
                 }
             }else{
                 echo ("No Participant Found");
@@ -54,7 +56,7 @@
             }
         catch(PDOException $e)
             {
-            echo $e->getMessage(); //If we are not successful we will see an error
+                echo $e->getMessage();
             }
         ?>
 

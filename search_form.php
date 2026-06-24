@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Register your interest</title>
+    <link rel="stylesheet" href="./css/search_form.css">
 </head>
-
 
 <body>
     <a href=".">Back to index</a>

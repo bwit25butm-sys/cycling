@@ -33,7 +33,7 @@
             }
         catch(PDOException $e)
             {
-                //put error stuff here
+                echo $e->getMessage();
             }
         ?>
 
