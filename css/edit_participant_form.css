@@ -1,133 +1,154 @@
-/* ==========================================================================
-   1. Base Reset & Typography
-   ========================================================================== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f7f6;
-    color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 20px;
+body{
+    font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
+    background:#fafafa;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px;
+    position:relative;
 }
 
-/* ==========================================================================
-   2. Layout & Container
-   ========================================================================== */
-.form-container {
-    background-color: #ffffff;
-    padding: 30px 40px;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    width: 100%;
-    max-width: 500px;
-    position: relative;
+/* Background circles */
+
+body::before{
+    content:"";
+    position:absolute;
+    width:380px;
+    height:380px;
+    border-radius:50%;
+    background:rgba(240,90,40,.08);
+    top:-140px;
+    right:-120px;
 }
 
-h1 {
-    font-size: 24px;
-    margin-bottom: 25px;
-    color: #2c3e50;
-    font-weight: 600;
+body::after{
+    content:"";
+    position:absolute;
+    width:420px;
+    height:420px;
+    border-radius:50%;
+    background:rgba(240,90,40,.05);
+    bottom:-170px;
+    left:-170px;
 }
 
-/* Back Link styling */
-.back-link {
-    display: inline-block;
-    text-decoration: none;
-    color: #7f8c8d;
-    font-size: 14px;
-    margin-bottom: 15px;
-    transition: color 0.2s ease;
+/* Form */
+
+.form-container{
+    width:100%;
+    max-width:560px;
+    background:#fff;
+    border-radius:22px;
+    padding:45px;
+    box-shadow:0 18px 40px rgba(0,0,0,.08);
+    position:relative;
+    z-index:2;
 }
 
-.back-link:hover {
-    color: #34495e;
+.back-link{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    text-decoration:none;
+    color:#667085;
+    font-weight:600;
+    margin-bottom:30px;
+    transition:.3s;
 }
 
-/* ==========================================================================
-   3. Form Elements & Inputs
-   ========================================================================== */
-.form-group {
-    margin-bottom: 20px;
+.back-link:hover{
+    color:#f05a28;
 }
 
-label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 500;
-    font-size: 14px;
-    color: #555;
+.back-link i{
+    transition:.3s;
 }
 
-input[type="text"],
-input[type="number"] {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid #dcdde1;
-    border-radius: 5px;
-    font-size: 15px;
-    color: #2c3e50;
-    background-color: #fff;
-    transition: border-color 0.2s, box-shadow 0.2s;
+.back-link:hover i{
+    transform:translateX(-4px);
 }
 
-/* Focus state for active input fields */
-input[type="number"]:focus {
-    outline: none;
-    border-color: #3498db;
-    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+h1{
+    font-size:36px;
+    font-weight:700;
+    color:#111827;
+    margin-bottom:35px;
 }
 
-/* Styling for disabled fields (Firstname & Surname) */
-input[disabled] {
-    background-color: #f8f9fa;
-    color: #7f8c8d;
-    border-color: #e2e8f0;
-    cursor: not-allowed;
+.form-group{
+    margin-bottom:22px;
 }
 
-/* ==========================================================================
-   4. Buttons & Actions
-   ========================================================================== */
-.submit-btn {
-    width: 100%;
-    background-color: #2ecc71;
-    color: #ffffff;
-    border: none;
-    padding: 14px;
-    font-size: 16px;
-    font-weight: 600;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    margin-top: 10px;
+.form-group label{
+    display:block;
+    font-weight:600;
+    margin-bottom:8px;
+    color:#374151;
 }
 
-.submit-btn:hover {
-    background-color: #27ae60;
+.form-group input{
+    width:100%;
+    height:56px;
+    border:1px solid #d1d5db;
+    border-radius:12px;
+    padding:0 18px;
+    font-size:16px;
+    transition:.3s;
 }
 
-.submit-btn:active {
-    background-color: #219653;
+.form-group input:focus{
+    outline:none;
+    border-color:#f05a28;
+    box-shadow:0 0 0 4px rgba(240,90,40,.12);
 }
 
-/* ==========================================================================
-   5. Mobile Responsiveness
-   ========================================================================== */
-@media (max-width: 480px) {
-    .form-container {
-        padding: 20px;
+.form-group input:disabled{
+    background:#f5f5f5;
+    color:#6b7280;
+    cursor:not-allowed;
+}
+
+.submit-btn{
+    width:100%;
+    height:56px;
+    border:none;
+    border-radius:12px;
+    background:#f05a28;
+    color:#fff;
+    font-size:17px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+    margin-top:10px;
+}
+
+.submit-btn:hover{
+    background:#d84c1a;
+    transform:translateY(-2px);
+    box-shadow:0 12px 30px rgba(240,90,40,.25);
+}
+
+@media(max-width:600px){
+
+    body{
+        padding:20px;
     }
-    
-    h1 {
-        font-size: 20px;
+
+    .form-container{
+        padding:30px 25px;
     }
+
+    h1{
+        font-size:28px;
+    }
+
 }

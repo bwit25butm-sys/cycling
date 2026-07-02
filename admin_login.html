@@ -4,25 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="icon" size="5x5" type="image/svg+xml" href="./logo.png" />
+    <link rel="icon" size="5x5" type="image/svg+xml" href="./resources/logo.png" />
     <title>Login to the admin area</title>
     <link rel="stylesheet" href="./css/register_form.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script src="./javascript/myscript.js" defer></script>
 </head>
 <body>
+    <!-- back to index -->
+    <a href="./index.html" class="back-link">
+        <i class="fa-solid fa-arrow-left"></i> Back to Index
+    </a>  
     <div class="form-container">
-    <a href="." class="back-link">Back to index</a>
-    <h1>Login to the admin area</h1>
+        <h1>Admin Login</h1>
         <form action="login.php"  method="POST">
             <div class="form-group">
                 <p>Username</p>
-                <input type="text" name="username"><br>
+                <input type="text" name="username" placeholder="Enter your username"><br>
             </div>
             <div class="form-group">
                 <p>Password</p>
-                <input type="password" name="password"><br>
+                <div class="password-container">
+                    <input type="password" name="password" placeholder="Enter your password" id="password">
+                    <i class="fa-solid fa-eye toggle-password" id="togglePassword"></i>
+                </div>
             </div>
             <input class="submit-btn" type = "Submit">
         </form>
+        <div class="register-link">
+            <p>Want to register your interest?</p>
+            <a href="./register_form.html">Register Interest</a>
+        </div>
     </div>
 </body>
 </html>

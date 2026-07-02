@@ -1,202 +1,175 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
 }
 
+/* Body */
 body{
+    font-family:'Inter',sans-serif;
+    background:#fafafa;
+    color:#1f2937;
     min-height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    background:#FFF7ED;
+    position:relative;
+    overflow-x:hidden;
     padding:30px;
 }
-
-/* Back Button */
-
 .back-link{
     position:absolute;
-    top:25px;
-    left:25px;
+    top:35px;
+    left:40px;
     text-decoration:none;
-    color:#F97316;
+    color:#667085;
+    font-size:20px;
     font-weight:600;
     transition:.3s;
 }
 
 .back-link:hover{
-    color:#EA580C;
+    color:#e85d2a;
 }
 
-/* Form Card */
-
 .form-container{
-
     width:100%;
-    max-width:470px;
-
-    background:#FFFFFF;
-
-    padding:40px;
-
-    border-radius:16px;
-
-    border:1px solid #E5E7EB;
-
-    box-shadow:0 12px 35px rgba(0,0,0,.08);
-
+    max-width:520px;
+    min-height:600px;
+    background:#fafafa;
+    border-radius: none;
+    padding:45px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
 }
 
 .form-container h1{
-
-    text-align:center;
-
-    color:#1F2937;
-
+    font-family:'Playfair Display',serif;
+    font-size:40px;
+    line-height:1.2;
     margin-bottom:30px;
-
-    font-size:30px;
-
-    font-weight:700;
-
+    color:#101828;
 }
 
-/* Form */
+form{
+    width:100%;
+}
 
 .form-group{
-
     margin-bottom:22px;
-
 }
-
-.form-group label,
-.form-group p{
-
-    display:block;
-
-    margin-bottom:8px;
-
-    color:#374151;
-
-    font-weight:600;
-
-}
-
-.form-group input{
-
-    width:100%;
-
-    padding:14px 16px;
-
-    border:1px solid #D1D5DB;
-
-    border-radius:10px;
-
-    font-size:15px;
-
-    transition:.3s;
-
-}
-
-.form-group input:focus{
-
-    outline:none;
-
-    border-color:#F97316;
-
-    box-shadow:0 0 0 4px rgba(249,115,22,.15);
-
-}
-
-/* Checkbox */
-
 .checkbox-group{
-
     display:flex;
-
     align-items:flex-start;
-
     gap:10px;
-
-    margin-bottom:25px;
-
+    margin:25px 0 35px;
 }
 
 .checkbox-group input{
-
     margin-top:4px;
-
-    accent-color:#F97316;
-
+    width:18px;
+    height:18px;
 }
 
 .checkbox-group label{
-
-    color:#4B5563;
-
-    font-size:14px;
-
-    line-height:1.6;
-
+    line-height:1.5;
+    color:#667085;
+}
+.form-group input{
+    width:100%;
+    height:56px;
+    padding:0 18px;
+    border:1px solid #d0d5dd;
+    border-radius:12px;
+    font-size:16px;
+}
+.form-group input:focus{
+    outline:none;
+    border-color:#e85d2a;
+    box-shadow:0 0 0 3px rgba(232,93,42,.2);
 }
 
 /* Button */
 
 .submit-btn{
-
     width:100%;
-
-    padding:15px;
-
-    background:#F97316;
-
-    color:#fff;
-
+    height:56px;
     border:none;
-
-    border-radius:10px;
-
-    font-size:16px;
-
+    border-radius:12px;
+    background:#e85d2a;
+    color:#fff;
+    font-size:17px;
     font-weight:600;
-
     cursor:pointer;
-
     transition:.3s;
-
 }
 
 .submit-btn:hover{
-
-    background:#EA580C;
-
+    background:#cf4f21;
+    transform:translateY(-2px);
+}
+/* register link */
+.register-link{
+    margin-top:20px;
+    text-align:center;
+}
+.register-link p{
+    font-size:16px;
+    color:#667085;
+    margin-bottom:8px;
+}
+.register-link a{
+    color:#e85d2a;
+    font-weight:600;
+    transition:.3s;
+}
+.register-link a:hover{
+    color:#cf4f21;
+}
+/* hide password */
+.password-container{
+    position:relative;
 }
 
-/* Responsive */
+.password-container input{
+    width:100%;
+    padding-right:55px;
+}
+
+.toggle-password{
+    position:absolute;
+    right:18px;
+    top:50%;
+    transform:translateY(-50%);
+    cursor:pointer;
+    font-size:20px;
+    user-select:none;
+    color:#777;
+    transition:.3s;
+}
+
+.toggle-password:hover{
+    color:#e85d2a;
+}
+/* Mobile */
 
 @media(max-width:600px){
 
-.form-container{
+    .back-link{
+        top:20px;
+        left:20px;
+    }
 
-padding:30px 20px;
+    .form-container{
+        max-width:100%;
+        min-height:auto;
+        padding:30px 25px;
+    }
 
-}
-
-.form-container h1{
-
-font-size:24px;
-
-}
-
-.back-link{
-
-top:15px;
-left:15px;
-
-}
+    .form-container h1{
+        font-size:32px;
+    }
 
 }

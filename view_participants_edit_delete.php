@@ -15,12 +15,15 @@ if (!isset($_SESSION['admin'])) {
     <title>View participants</title>
     <link rel="stylesheet" href="./css/view.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./javascript/myscript.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 <body>
     <h1>View all of the participants for edit or delete</h1>
     <a href="./admin_menu.php" class="back-btn">
-        ← Back to Dashboard
-    </a>        
+        <i class="fa-solid fa-arrow-left-long"></i>
+        Back to Dashboard
+    </a>    
     <?php
         
     //including connection variables - remember to update these if you are using XAMPP    
@@ -39,7 +42,7 @@ if (!isset($_SESSION['admin'])) {
             if(count($result)){
                 echo "<table border='1'>";
                 echo "<tr>
-                        <th>ID</th>
+                        <th>S.N.</th>
                         <th>First Name</th>
                         <th>Sur Name</th>
                         <th>Email</th>
@@ -48,19 +51,41 @@ if (!isset($_SESSION['admin'])) {
                         <th>Actions</th>
                     </tr>";
 
+                $sn = 1;
                 foreach($result as $row){
                     echo "<tr>";
-                        echo "<td>".$row['id']."</td>";
+                        echo "<td>".$sn++."</td>";
                         echo "<td>".$row['firstname']."</td>";
                         echo "<td>".$row['surname']."</td>";
                         echo "<td>".$row['email']."</td>";
                         echo "<td>".$row['power_output']."</td>";
                         echo "<td>".$row['distance']."</td>";
                         echo "<td class='actions'>
-                        <a class='btn view' href='edit_participant.php?id=".$row['id']."'>View</a>
-                        <a class='btn edit' href='edit_participant.php?id=".$row['id']."'>Edit</a>
-                        <a class='btn delete' href='delete.php?id=".$row['id']."' onclick='return confirm(\"Are you sure you want to delete this participant?\")'>Delete</a>
-                    </td>"; 
+
+                            <div class='dropdown'>
+
+                                <button class='dropbtn'>
+                                    <i class='fa-solid fa-ellipsis-vertical'></i>
+                                </button>
+
+                                <div class='dropdown-content'>
+
+                                    <a href='edit_participant.php?id=".$row['id']."'>
+                                        <i class='fa-solid fa-pen-to-square'></i>
+                                        Edit
+                                    </a>
+
+                                    <a href='delete.php?id=".$row['id']."'
+                                    class='delete-item'>
+                                        <i class='fa-solid fa-trash'></i>
+                                        Delete
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                            </td>";
                     echo "</tr>";
                 }
             }else{
