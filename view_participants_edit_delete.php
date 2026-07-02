@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['admin'])) {
+    header("Location: admin_login.html");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +18,9 @@
 </head>
 <body>
     <h1>View all of the participants for edit or delete</h1>
-    <a href=".">Back to index</a>
+    <a href="./admin_menu.php" class="back-btn">
+        ← Back to Dashboard
+    </a>        
     <?php
         
     //including connection variables - remember to update these if you are using XAMPP    
@@ -40,13 +50,17 @@
 
                 foreach($result as $row){
                     echo "<tr>";
-                        echo "<td>".$row['id']."</td>:";
-                        echo "<td>".$row['firstname']."</td>:";
-                        echo "<td>".$row['surname']."</td>:";
-                        echo "<td>".$row['email']."</td>:";
-                        echo "<td>".$row['power_output']."</td>:";
-                        echo "<td>".$row['distance']."</td>:";
-                        echo "<td><a href='edit_participant.php?id=".$row['id']."'>Edit</a> | <a href='delete.php?id=".$row['id']."'>Delete</a></td>";  
+                        echo "<td>".$row['id']."</td>";
+                        echo "<td>".$row['firstname']."</td>";
+                        echo "<td>".$row['surname']."</td>";
+                        echo "<td>".$row['email']."</td>";
+                        echo "<td>".$row['power_output']."</td>";
+                        echo "<td>".$row['distance']."</td>";
+                        echo "<td class='actions'>
+                        <a class='btn view' href='edit_participant.php?id=".$row['id']."'>View</a>
+                        <a class='btn edit' href='edit_participant.php?id=".$row['id']."'>Edit</a>
+                        <a class='btn delete' href='delete.php?id=".$row['id']."' onclick='return confirm(\"Are you sure you want to delete this participant?\")'>Delete</a>
+                    </td>"; 
                     echo "</tr>";
                 }
             }else{

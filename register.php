@@ -9,143 +9,110 @@
 </head>
 <body>
     <?php
-    //including connection variables  
     include 'dbconnect.php';
 
             try {
-                $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password); //building a new connection object
-                // set the PDO error mode to exception
+                $conn = new PDO("mysql:host=$servername;dbname=$database;charset=utf8", $username, $password);
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                
-                //TODO INSERT - complete the functionality
+
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $firstname = trim($_POST['firstname']);
-                    $surname = trim($_POST['surname']);
-                    $email = trim($_POST['email']);
-                    $terms = isset($_POST['terms']) ? 1 : 0;
-                    // $firstname = $_POST['firstname'];
-                    // $surname = $_POST['surname'];
-                    // $email = $_POST['email'];
-                    // $power_output = $_POST['power_output'];
-                    // $distance = $_POST['distance'];
+                    $surname   = trim($_POST['surname']);
+                    $email     = trim($_POST['email']);
+                    $terms     = isset($_POST['terms']) ? 1 : 0;
+                    
+        /*Required Validation*/
+        if (empty($firstname) || empty($surname) || empty($email) || !$terms) 
+        {
 
-                    // Server-side validation
-                    if (
-                        empty($firstname) ||
-                        empty($surname) ||
-                        empty($email) ||
-                        $terms == 0
-                    ) {
+            echo "
+            <script>
+            Swal.fire({
+                icon:'error',
+                title:'Missing Information',
+                text:'Please complete all fields and accept the terms.'
+            }).then(()=>{
+                window.location='register_form.html';
+            });
+            </script>";
+            exit();
+        }
 
-                        echo "
-                        <script>
-                        Swal.fire({
-                            icon:'error',
-                            title:'Error',
-                            text:'Please complete all fields and accept the terms.'
-                        }).then(() => {
-                            window.location='register_form.html';
-                        });
-                        </script>";
+        /* Email Validation */
 
-                        exit();
-                    }
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
-                    // Validate email
-                    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            echo "
+            <script>
+            Swal.fire({
+                icon:'error',
+                title:'Invalid Email',
+                text:'Please enter a valid email address.'
+            }).then(()=>{
+                window.location='register_form.html';
+            });
+            </script>";
+            exit();
+        }
 
-                        echo "
-                        <script>
-                        Swal.fire({
-                            icon:'error',
-                            title:'Invalid Email',
-                            text:'Please enter a valid email address.'
-                        }).then(() => {
-                            window.location='register_form.html';
-                        });
-                        </script>";
+        /* Duplicate Email Check */
 
-                        exit();
-                    }
-                    // $stmt = $conn->prepare("INSERT INTO participant (firstname, surname, email, power_output, distance) VALUES (:firstname, :surname, :email, :power_output, :distance)");
-                    // $stmt->bindParam(':firstname', $firstname);
-                    // $stmt->bindParam(':surname', $surname);
-                    // $stmt->bindParam(':email', $email);
-                    // $stmt->bindParam(':power_output', $power_output);
-                    // $stmt->bindParam(':distance', $distance);
-                    // $stmt->execute();
-                    $stmt = $conn->prepare("
-                        INSERT INTO interest (firstname, surname, email, terms)
-                        VALUES (:firstname, :surname, :email, :terms)
-                    ");
-                    $stmt->bindParam(':firstname', $firstname);
-                    $stmt->bindParam(':surname', $surname);
-                    $stmt->bindParam(':email', $email);
-                    $stmt->bindParam(':terms', $terms);
+        $check = $conn->prepare("SELECT id FROM interest WHERE email = :email");
+        $check->bindParam(':email', $email);
+        $check->execute();
 
-                    $stmt->execute();
+        if ($check->rowCount() > 0) {
 
-                    echo "
-                    <script>
-                    Swal.fire({
-                        icon:'success',
-                        title:'Registration Successful',
-                        text:'Thank you for registering your interest!'
-                    }).then(() => {
-                        window.location='index.html';
-                    });
-                    </script>";
+            echo "
+            <script>
+            Swal.fire({
+                icon:'warning',
+                title:'Email Already Registered',
+                text:'This email has already been used to register.'
+            }).then(()=>{
+                window.location='register_form.html';
+            });
+            </script>";
+            exit();
+        }
 
-                }
+        /* Insert Data */
 
-            }
-            catch(PDOException $e){
+        $stmt = $conn->prepare("INSERT INTO interest(firstname, surname, email, terms)VALUES(:firstname, :surname, :email, :terms)");
 
-                echo "
-                <script>
-                Swal.fire({
-                    icon:'error',
-                    title:'Database Error',
-                    text:'".$e->getMessage()."'
-                });
-                </script>";
-                }
-            catch(PDOException $e)
-                {
-                echo $e->getMessage(); //If we are not successful we will see an error
+        $stmt->bindParam(':firstname', $firstname);
+        $stmt->bindParam(':surname', $surname);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':terms', $terms);
 
-                }
+        $stmt->execute();
 
+        echo "
+        <script>
+        Swal.fire({
+            icon:'success',
+            title:'Registration Successful',
+            text:'Thank you for registering your interest!'
+        }).then(()=>{
+            window.location='index.html';
+        });
+        </script>";
 
+    }
 
+} catch(PDOException $e) {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                //made you look
-        
-        
-        ?>
-
-
+    echo "
+    <script>
+    Swal.fire({
+        icon:'error',
+        title:'Database Error',
+        text:'Something went wrong while saving your information.'
+    }).then(()=>{
+        window.location='register_form.html';
+    });
+    </script>";
+}
+?>
 </body>
 </html>

@@ -1,85 +1,146 @@
-/* General Page Styling */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f8f9fa;
-    color: #333333;
-    line-height: 1.6;
-    padding: 40px 20px;
-    max-width: 1200px;
-    margin: 0 auto;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
 }
 
-h1 {
-    color: #2c3e50;
-    font-size: 2rem;
-    margin-bottom: 10px;
+body{
+    background:#FFF7ED;
+    padding:40px;
+    color:#1F2937;
 }
 
-/* Navigation Link Styling */
-a {
-    display: inline-block;
-    color: #3498db;
-    text-decoration: none;
-    font-weight: 600;
-    margin-bottom: 25px;
-    transition: color 0.2s ease-in-out;
+h1{
+    text-align:center;
+    margin-bottom:10px;
+    color:#F97316;
 }
 
-a:hover {
-    color: #2980b9;
-    text-decoration: underline;
+.subtitle{
+    text-align:center;
+    color:#6B7280;
+    margin-bottom:35px;
 }
 
-/* Table Container (for responsiveness) */
-.table-container {
-    overflow-x: auto;
-    background: #ffffff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    margin-top: 15px;
+.back-btn{
+    display:inline-block;
+    margin-bottom:25px;
+    padding:10px 18px;
+    background:#F97316;
+    color:#fff;
+    text-decoration:none;
+    border-radius:8px;
+    transition:.3s;
 }
 
-/* Modern Table Styling */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
-    background: #ffffff;
+.back-btn:hover{
+    background:#EA580C;
 }
 
-th, td {
-    padding: 14px 18px;
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:#fff;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
 }
 
-th {
-    background-color: #2c3e50;
-    color: #ffffff;
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    letter-spacing: 0.5px;
+th{
+    background:#F97316;
+    color:white;
+    padding:16px;
+    font-weight:600;
 }
 
-tr {
-    border-bottom: 1px solid #e0e0e0;
+td{
+    padding:14px;
+    text-align:center;
+    border-bottom:1px solid #eee;
 }
 
-/* Zebra Striping */
-tr:nth-child(even) {
-    background-color: #fdfdfd;
+tr:hover{
+    background:#FFF4E8;
 }
 
-tr:nth-child(odd) {
-    background-color: #f4f6f7;
+.actions{
+    white-space:nowrap;
 }
 
-/* Hover Effect for Rows */
-tr:hover {
-    background-color: #eaeded;
+.btn{
+    display:inline-block;
+    padding:8px 14px;
+    margin:3px;
+    text-decoration:none;
+    border-radius:6px;
+    font-size:14px;
+    font-weight:600;
+    transition:.3s;
 }
 
-/* Total count indicator styling */
-body > text {
-    font-weight: bold;
-    color: #7f8c8d;
+.view{
+    background:#2563EB;
+    color:white;
+}
+
+.view:hover{
+    background:#1D4ED8;
+}
+
+.edit{
+    background:#F97316;
+    color:white;
+}
+
+.edit:hover{
+    background:#EA580C;
+}
+
+.delete{
+    background:#DC2626;
+    color:white;
+}
+
+.delete:hover{
+    background:#B91C1C;
+}
+/* Back Button */
+
+.back-btn{
+    display:inline-block;
+    margin:20px 0 30px;
+    padding:12px 22px;
+    background:#F97316;
+    color:#fff;
+    text-decoration:none;
+    border-radius:8px;
+    font-size:15px;
+    font-weight:600;
+    transition:all 0.3s ease;
+    box-shadow:0 4px 10px rgba(249,115,22,0.25);
+}
+
+.back-btn:hover{
+    background:#EA580C;
+    transform:translateY(-2px);
+    box-shadow:0 6px 15px rgba(249,115,22,0.35);
+}
+
+.back-btn:active{
+    transform:translateY(0);
+}
+@media(max-width:900px){
+
+    body{
+        padding:20px;
+        overflow-x:auto;
+    }
+
+    table{
+        min-width:900px;
+    }
+
 }

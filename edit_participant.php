@@ -1,81 +1,136 @@
+<?php
+
+include 'dbconnect.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Update participants score</title>
+    <title>Update Participant Scores</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-<a href=".">Back to index</a>
-    <?php
-        
-        //including connection variables   
-        include 'dbconnect.php';
 
-        try {
-            if($_SERVER['REQUEST_METHOD'] == 'POST') //has the user submitted the form and edited the participant
-            {
-                //TODO - UPDATE section
-                
-                $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password); //building a new connection object
-                // set the PDO error mode to exception
-                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                
-            }
-            else{
-                //TODO - SELECT section
+<?php
 
-                $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password); //building a new connection object
-                // set the PDO error mode to exception
-                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+try{
 
-                include "edit_participant_form.php";
-            }
+    $conn = new PDO(
+        "mysql:host=$servername;port=$port;dbname=$database",
+        $username,
+        $password
+    );
+
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // ===============================
+    // UPDATE PARTICIPANT
+    // ===============================
+
+    if($_SERVER["REQUEST_METHOD"]=="POST"){
+
+        $id = $_POST['id'];
+        $power_output = trim($_POST['power_output']);
+        $distance = trim($_POST['distance']);
+
+        if(!is_numeric($power_output) || !is_numeric($distance)){
+
+            echo "
+            <script>
+            Swal.fire({
+                icon:'error',
+                title:'Invalid Input',
+                text:'Power Output and Distance must be numeric.'
+            }).then(()=>{
+                history.back();
+            });
+            </script>";
+
+            exit();
+
         }
-        catch(PDOException $e)
-            {
-                //error stuff here
-            }
 
+        $stmt = $conn->prepare("
+            UPDATE participant
+            SET
+                power_output = :power_output,
+                distance = :distance
+            WHERE id = :id
+        ");
 
+        $stmt->bindParam(':power_output',$power_output);
+        $stmt->bindParam(':distance',$distance);
+        $stmt->bindParam(':id',$id);
 
+        $stmt->execute();
 
+        echo "
+        <script>
+        Swal.fire({
+            icon:'success',
+            title:'Updated!',
+            text:'Participant updated successfully.'
+        }).then(()=>{
+            window.location='view_participants_edit_delete.php';
+        });
+        </script>";
 
+    }
 
+    // ===============================
+    // DISPLAY FORM
+    // ===============================
 
+    else{
 
+        if(!isset($_GET['id'])){
 
+            die("Participant ID missing.");
 
+        }
 
+        $id = $_GET['id'];
 
+        $stmt = $conn->prepare("
+            SELECT *
+            FROM participant
+            WHERE id=:id
+        ");
 
+        $stmt->bindParam(':id',$id);
 
+        $stmt->execute();
 
+        $participant = $stmt->fetch(PDO::FETCH_ASSOC);
 
+        if(!$participant){
 
+            die("Participant not found.");
 
+        }
 
+        $firstname = $participant['firstname'];
+        $surname = $participant['surname'];
+        $power_output = $participant['power_output'];
+        $distance = $participant['distance'];
 
+        include "edit_participant_form.php";
 
+    }
 
+}
 
+catch(PDOException $e){
 
+    echo $e->getMessage();
 
+}
 
-
-
-
-            /**
-            * For the brave souls who get this far: You are the chosen ones,
-            * the valiant knights of programming who toil away, without rest,
-            * fixing our most awful code. To you, true saviors, kings of men,
-            * I say this: never gonna give you up, never gonna let you down,
-            * never gonna run around and desert you. Never gonna make you cry,
-            * never gonna say goodbye. Never gonna tell a lie and hurt you.
-            */
-        ?>
-
+?>
 
 </body>
 </html>

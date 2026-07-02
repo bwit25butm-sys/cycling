@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['admin'])) {
+    header("Location: admin_login.html");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,24 +17,59 @@
 </head>
 
 <body>
-    <a href=".">Back to index</a>
-    <h1>Search for participants or clubs</h1>
+    <a href="./admin_menu.php" class="back-btn">← Back to Dashboard</a>
 
-    <h2>Search for an individual participant</h2>
-    <form action="search_result.php" method="POST">
-        <p>Participant firstname or surname</p>
-        <input type="text" name="firstname"><br>
-        <input type="hidden" name="participant" value="1">
-        <input type = "Submit">
+<h1>Search Participants & Clubs</h1>
 
-    </form>
-    
-    <h2>Search for a club / team</h2>
-    <form action="search_result.php" method="POST">
-        <p>Club name</p>
-        <input type="text" name="club"><br>
-        <input type = "Submit">
+<div class="wrapper">
 
-    </form>
+    <div class="card">
+
+        <h2>🔍 Participant Search</h2>
+
+        <form action="search_result.php" method="POST">
+
+            <label>Name</label>
+
+            <input
+                type="text"
+                name="firstname"
+                placeholder="Enter first name or surname"
+                required>
+
+            <input type="hidden" name="participant" value="1">
+
+            <button type="submit">
+                Search Participant
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>🚴 Club Search</h2>
+
+        <form action="search_result.php" method="POST">
+
+            <label>Club Name</label>
+
+            <input
+                type="text"
+                name="club"
+                placeholder="Enter club name"
+                required>
+
+            <button type="submit">
+                Search Club
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
 </body>
 </html>
