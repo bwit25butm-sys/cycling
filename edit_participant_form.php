@@ -10,6 +10,7 @@ $id = $id ?? '';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" size="5x5" type="image/svg+xml" href="./resources/logo.png" />
     <title>Update Participant Scores</title>
     <link rel="stylesheet" href="./css/register_form.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -49,6 +50,7 @@ $id = $id ?? '';
                     name="power_output"
                     step="0.01"
                     min="0"
+                    placeholder="0"
                     value="<?php echo htmlspecialchars($power_output); ?>"
                     required>
             </div>
@@ -60,6 +62,7 @@ $id = $id ?? '';
                     name="distance"
                     step="0.01"
                     min="0"
+                    placeholder="0"
                     value="<?php echo htmlspecialchars($distance); ?>"
                     required>
             </div>

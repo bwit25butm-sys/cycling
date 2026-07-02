@@ -10,7 +10,7 @@ include 'dbconnect.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Participant Scores</title>
-
+    <link rel="icon" size="5x5" type="image/svg+xml" href="./resources/logo.png" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
@@ -27,10 +27,6 @@ try{
 
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // ===============================
-    // UPDATE PARTICIPANT
-    // ===============================
-
     if($_SERVER["REQUEST_METHOD"]=="POST"){
 
         $id = $_POST['id'];
@@ -42,14 +38,18 @@ try{
             echo "
             <script>
             Swal.fire({
-                icon:'error',
-                title:'Invalid Input',
-                text:'Power Output and Distance must be numeric.'
-            }).then(()=>{
+                toast: true,
+                position: 'bottom-end',
+                icon: 'error',
+                title: 'Invalid Input',
+                text: 'Power Output and Distance must be numeric.',
+                showConfirmButton: false,
+                timer: 1000,
+                timerProgressBar: true
+            }).then(() => {
                 history.back();
             });
             </script>";
-
             exit();
 
         }
@@ -70,31 +70,27 @@ try{
 
         echo "
         <script>
-        Swal.fire({
-            icon:'success',
-            title:'Updated!',
-            text:'Participant updated successfully.'
-        }).then(()=>{
-            window.location='view_participants_edit_delete.php';
-        });
-        </script>";
+            Swal.fire({
+                toast: true,
+                position: 'bottom-end',
+                icon: 'success',
+                title: 'Updated!',
+                text: 'Participant updated successfully.',
+                showConfirmButton: false,
+                timer: 1000,
+                timerProgressBar: true
+            }).then(() => {
+                window.location='view_participants_edit_delete.php';
+            });
+            </script>";
 
     }
 
-    // ===============================
-    // DISPLAY FORM
-    // ===============================
-
     else{
-
         if(!isset($_GET['id'])){
-
             die("Participant ID missing.");
-
         }
-
         $id = $_GET['id'];
-
         $stmt = $conn->prepare("
             SELECT *
             FROM participant
@@ -102,11 +98,8 @@ try{
         ");
 
         $stmt->bindParam(':id',$id);
-
         $stmt->execute();
-
         $participant = $stmt->fetch(PDO::FETCH_ASSOC);
-
         if(!$participant){
 
             die("Participant not found.");

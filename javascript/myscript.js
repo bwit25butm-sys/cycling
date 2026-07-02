@@ -52,3 +52,22 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+
+function confirmLogout(e) {
+    e.preventDefault();
+
+    Swal.fire({
+        title: 'Logout?',
+        text: 'Are you sure you want to end your administrator session?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#f05a28',
+        cancelButtonColor: '#6b7280',
+        confirmButtonText: 'Yes, Logout',
+        cancelButtonText: 'Cancel'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = 'logout.php';
+        }
+    });
+}

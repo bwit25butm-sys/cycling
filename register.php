@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" size="5x5" type="image/svg+xml" href="./resources/logo.png" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Register your interest</title>
 </head>
@@ -28,11 +29,16 @@
             echo "
             <script>
             Swal.fire({
-                icon:'error',
-                title:'Missing Information',
-                text:'Please complete all fields and accept the terms.'
-            }).then(()=>{
-                window.location='register_form.html';
+                toast: true,
+                position: 'bottom-end',
+                icon: 'error',
+                title: 'Missing Information',
+                text: 'Please complete all fields and accept the terms.',
+                showConfirmButton: false,
+                timer: 1000,
+                timerProgressBar: true
+            }).then(() => {
+                window.location ='register_form.html';
             });
             </script>";
             exit();
@@ -45,11 +51,16 @@
             echo "
             <script>
             Swal.fire({
-                icon:'error',
-                title:'Invalid Email',
-                text:'Please enter a valid email address.'
-            }).then(()=>{
-                window.location='register_form.html';
+                toast: true,
+                position: 'bottom-end',
+                icon: 'error',
+                title: 'Invalid Email',
+                text: 'Please enter a valid email address.',
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true
+            }).then(() => {
+                window.location ='register_form.html';
             });
             </script>";
             exit();
@@ -66,20 +77,23 @@
             echo "
             <script>
             Swal.fire({
-                icon:'warning',
-                title:'Email Already Registered',
-                text:'This email has already been used to register.'
-            }).then(()=>{
-                window.location='register_form.html';
+                toast: true,
+                position: 'bottom-end',
+                icon: 'warning',
+                title: 'Email Already Registered',
+                text: 'This email has already been used to register.',
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true
+            }).then(() => {
+                window.location ='register_form.html';
             });
             </script>";
             exit();
         }
 
         /* Insert Data */
-
         $stmt = $conn->prepare("INSERT INTO interest(firstname, surname, email, terms)VALUES(:firstname, :surname, :email, :terms)");
-
         $stmt->bindParam(':firstname', $firstname);
         $stmt->bindParam(':surname', $surname);
         $stmt->bindParam(':email', $email);
@@ -88,30 +102,40 @@
         $stmt->execute();
 
         echo "
-        <script>
-        Swal.fire({
-            icon:'success',
-            title:'Registration Successful',
-            text:'Thank you for registering your interest!'
-        }).then(()=>{
-            window.location='index.html';
-        });
-        </script>";
+            <script>
+            Swal.fire({
+                toast: true,
+                position: 'bottom-end',
+                icon: 'success',
+                title: 'Registration Successful',
+                text: 'Thank you for registering your interest!',
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true
+            }).then(() => {
+                window.location ='index.html';
+            });
+            </script>";
 
     }
 
 } catch(PDOException $e) {
 
     echo "
-    <script>
-    Swal.fire({
-        icon:'error',
-        title:'Database Error',
-        text:'Something went wrong while saving your information.'
-    }).then(()=>{
-        window.location='register_form.html';
-    });
-    </script>";
+        <script>
+        Swal.fire({
+            toast: true,
+            position: 'bottom-end',
+            icon: 'error',
+            title: 'Registration Failed',
+            text: 'Something went wrong while saving your information.',
+            showConfirmButton: false,
+            timer: 1000,
+            timerProgressBar: true
+        }).then(() => {
+            window.location ='register_form.html';
+        });
+        </script>";
 }
 ?>
 </body>

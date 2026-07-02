@@ -12,6 +12,7 @@ if (!isset($_SESSION['admin'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" size="5x5" type="image/svg+xml" href="./resources/logo.png" />
     <title>Register your interest</title>
     <link rel="stylesheet" href="./css/search_form.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">

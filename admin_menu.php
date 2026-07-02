@@ -12,9 +12,11 @@ if (!isset($_SESSION['admin'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" size="5x5" type="image/svg+xml" href="./resources/logo.png" />
     <title>Admin Dashboard | Cit-E Cycling</title>
-    <link rel="icon" href="./resources/logo.png">
     <link rel="stylesheet" href="./css/admin_menu.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./javascript/myscript.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 <body>
@@ -54,7 +56,7 @@ if (!isset($_SESSION['admin'])) {
                 </p>
             </a>
 
-            <a href="logout.php" class="card logout">
+            <a href="#" class="card logout" onclick="confirmLogout(event)">
                 <div class="icon">
                     <i class="fa-solid fa-right-from-bracket"></i>
                 </div>
@@ -63,6 +65,7 @@ if (!isset($_SESSION['admin'])) {
                     Securely end your administrator session.
                 </p>
             </a>
+            
         </div>
     </div>
 </body>

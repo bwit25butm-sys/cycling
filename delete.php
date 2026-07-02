@@ -11,6 +11,7 @@ if (!isset($_SESSION['admin'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" size="5x5" type="image/svg+xml" href="./resources/logo.png" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Delete participant</title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -36,16 +37,20 @@ try {
         $stmt->execute();
 
         echo "
-        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
         <script>
             Swal.fire({
+                toast: true,
+                position: 'bottom-end',
+                icon: 'success',
                 title: 'Deleted!',
                 text: 'Participant deleted successfully.',
-                icon: 'success'
+                showConfirmButton: false,
+                timer: 700,
+                timerProgressBar: true
             }).then(() => {
                 window.location.href='view_participants_edit_delete.php';
             });
-        </script>";
+            </script>";
 
         header("refresh:2;url=view_participants_edit_delete.php");
     }

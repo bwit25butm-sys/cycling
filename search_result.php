@@ -1,12 +1,10 @@
 <?php
 session_start();
-
 if (!isset($_SESSION['admin'])) {
     header("Location: admin_login.html");
     exit();
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,15 +12,14 @@ if (!isset($_SESSION['admin'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Results</title>
     <link rel="stylesheet" href="./css/view.css">
+    <link rel="icon" size="5x5" type="image/svg+xml" href="./resources/logo.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 <body>
-
-<a href="admin_menu.php" class="back-btn">
-    <i class="fa-solid fa-arrow-left-long"></i>
-    Back to Dashboard
-</a>
-
+<a href="./admin_menu.php" class="back-btn">
+        <i class="fa-solid fa-arrow-left-long"></i>
+        Back to Dashboard
+    </a>
 <?php
 
 include 'dbconnect.php';
@@ -145,8 +142,6 @@ catch(PDOException $e){
     echo $e->getMessage();
 
 }
-
 ?>
-
 </body>
 </html>

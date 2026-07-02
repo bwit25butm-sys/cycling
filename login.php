@@ -9,7 +9,7 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Document</title>
-    
+    <link rel="icon" size="5x5" type="image/svg+xml" href="./resources/logo.png" />
 </head>
 <body>
     <?php
@@ -32,11 +32,15 @@ session_start();
                     echo "
                     <script>
                     Swal.fire({
-                        icon:'error',
-                        title:'Error',
-                        text:'Please enter both username and password.'
+                        toast: true,
+                        position: 'bottom-end',
+                        icon: 'success',
+                        title: 'Logged out successfully',
+                        showConfirmButton: false,
+                        timer: 1000,
+                        timerProgressBar: true
                     }).then(() => {
-                        window.location='admin_login.html';
+                        window.location = 'admin_login.html';
                     });
                     </script>";
 
@@ -44,13 +48,7 @@ session_start();
                 }
 
                 // Check login
-                $stmt = $conn->prepare("
-                    SELECT *
-                    FROM user
-                    WHERE username = :username
-                    AND password = :password
-                ");
-
+                $stmt = $conn->prepare("SELECT * FROM user WHERE username = :username AND password = :password ");
                 $stmt->bindParam(':username', $username);
                 $stmt->bindParam(':password', $password);
 
@@ -62,26 +60,34 @@ session_start();
                     $_SESSION['username'] = $username;
 
                     echo "
-                    <script>
-                    Swal.fire({
-                        icon:'success',
-                        title:'Login Successful',
-                        text:'Welcome Admin!'
-                    }).then(() => {
-                        window.location='admin_menu.php';
-                    });
-                    </script>";
-
+                        <script>
+                        Swal.fire({
+                            toast: true,
+                            position: 'bottom-end',
+                            icon: 'success',
+                            title: 'Login successful',
+                            text: 'Welcome, Administrator!',
+                            showConfirmButton: false,
+                            timer: 1000,
+                            timerProgressBar: true
+                        }).then(() => {
+                            window.location = 'admin_menu.php';
+                        });
+                        </script>";
                 } else {
 
                     echo "
                     <script>
                     Swal.fire({
-                        icon:'error',
-                        title:'Login Failed',
-                        text:'Invalid username or password.'
+                        toast: true,
+                        position: 'bottom-end',
+                        icon: 'warning',
+                        title: 'Login Failed',
+                        showConfirmButton: false,
+                        timer: 1000,
+                        timerProgressBar: true
                     }).then(() => {
-                        window.location='admin_login.html';
+                        window.location = 'admin_login.html';
                     });
                     </script>";
 
@@ -92,9 +98,14 @@ session_start();
                 echo "
                 <script>
                 Swal.fire({
-                    icon:'error',
-                    title:'Database Error',
-                    text:'".$e->getMessage()."'
+                    toast: true,
+                    position: 'bottom-end',
+                    icon: 'error',
+                    title: 'Database Error',
+                    text: 'Something went wrong in database.',
+                    showConfirmButton: false,
+                    timer: 1000,
+                    timerProgressBar: true
                 });
                 </script>";
 
@@ -109,6 +120,11 @@ session_start();
                     icon:'warning',
                     title:'Access Denied',
                     text:'You are here by mistake.'
+                    toast: true,
+                    position: 'bottom-end',
+                    showConfirmButton: false,
+                    timer: 1000,
+                    timerProgressBar: true
                 }).then(() => {
                     window.location='admin_login.html';
                 });
